@@ -22,9 +22,12 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk --release --split-per-abi
 
+      - name: Rename assets
+        run: mv "build/app/outputs/apk/release/app-x86_64-release.apk build/app/outputs/apk/release/appname-release.apk"
+
       - name: Push to Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/apk/release/app-release.apk"
+          artifacts: "build/app/outputs/apk/release/appname-release.apk"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
